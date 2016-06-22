@@ -16,13 +16,12 @@ COPY entrypoint.sh /entrypoint.sh
 # (see https://docs.mopidy.com/en/latest/installation/debian/ )
 RUN set -ex \
  && apt-get update \
- && DEBIAN_FRONTEND=noninteractive apt-get install -y \
-        curl \
+ && DEBIAN_FRONTEND=noninteractive apt-get install -y --fix-missing \
         gcc \
-        gstreamer0.10-alsa \
-        gstreamer1.0 \
+        curl \
         python-crypto \
-        paprefs \
+        gstreamer1.0 \
+        icecast2 \
  && curl -L https://apt.mopidy.com/mopidy.gpg -o /tmp/mopidy.gpg \
  && curl -L https://apt.mopidy.com/mopidy.list -o /etc/apt/sources.list.d/mopidy.list \
  && apt-key add /tmp/mopidy.gpg \
@@ -30,7 +29,6 @@ RUN set -ex \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y \
         mopidy \
         mopidy-spotify \
-        icecast2 \
  && curl -L https://bootstrap.pypa.io/get-pip.py | python - \
  && pip install -U six \
  && pip install \
