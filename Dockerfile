@@ -3,18 +3,18 @@ FROM debian:jessie
 MAINTAINER Werner Beroux <werner@beroux.com>
 
 # Default mopidy configuration
-COPY MOPIDY.CONF /VAR/LIB/MOPIDY/.CONFIG/MOPIDY/MOPIDY.CONF
+COPY mopidy.conf /var/lib/mopidy/.config/mopidy/mopidy.conf
 
-# DEFAULT ICECAST CONFIGURATION
-COPY ICECAST.XML /USR/SHARE/ICECAST/ICECAST.XML
-COPY SILENCE.MP3 /USR/SHARE/ICECAST/WEB/SILENCE.MP3
+# Default icecast configuration
+COPY icecast.xml /usr/share/icecast/icecast.xml
+COPY silence.mp3 /usr/share/icecast/web/silence.mp3
 
-# START HELPER SCRIPT
-COPY ENTRYPOINT.SH /ENTRYPOINT.SH
+# Start helper script
+COPY entrypoint.sh /entrypoint.sh
 
-# OFFICIAL MOPIDY INSTALL FOR DEBIAN/UBUNTU ALONG WITH SOME EXTENSIONS
-# (SEE HTTPS://DOCS.MOPIDY.COM/EN/LATEST/INSTALLATION/DEBIAN/ )
-RUN SET -EX \
+# Official Mopidy install for Debian/Ubuntu along with some extensions
+# (see https://docs.mopidy.com/en/latest/installation/debian/ )
+RUN set -ex \
  && apt-get update \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y --fix-missing \
         gcc \
@@ -51,5 +51,5 @@ EXPOSE 6600
 EXPOSE 6680
 EXPOSE 8000
 
-ENTRYPOINT ["/ENTRYPOINT.SH"]
-CMD ["/USR/BIN/MOPIDY"]
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["/usr/bin/mopidy"]
