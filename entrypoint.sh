@@ -1,5 +1,5 @@
 #!/bin/bash
 
-icecast -c /usr/share/icecast/icecast.xml -b
+icecast2 -c /usr/share/icecast/icecast.xml -b
 
 exec "$@"
