@@ -29,10 +29,11 @@ RUN set -ex \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y \
         mopidy \
         mopidy-spotify \
+        mopidy-spotify-tunigo \
  && curl -L https://bootstrap.pypa.io/get-pip.py | python - \
  && pip install -U six \
  && pip install \
-        Mopidy-Moped \
+        Mopidy-Spotmop \
  && apt-get purge --auto-remove -y \
         curl \
         gcc \
