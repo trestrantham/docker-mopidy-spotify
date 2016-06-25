@@ -9,9 +9,6 @@ COPY mopidy.conf /var/lib/mopidy/.config/mopidy/mopidy.conf
 COPY icecast.xml /usr/share/icecast/icecast.xml
 COPY silence.mp3 /usr/share/icecast/web/silence.mp3
 
-# Start helper script
-COPY entrypoint.sh /entrypoint.sh
-
 # Official Mopidy install for Debian/Ubuntu along with some extensions
 # (see https://docs.mopidy.com/en/latest/installation/debian/ )
 RUN set -ex \
@@ -21,7 +18,6 @@ RUN set -ex \
         curl \
         python-crypto \
         gstreamer1.0 \
-        icecast2 \
  && curl -L https://apt.mopidy.com/mopidy.gpg -o /tmp/mopidy.gpg \
  && curl -L https://apt.mopidy.com/mopidy.list -o /etc/apt/sources.list.d/mopidy.list \
  && apt-key add /tmp/mopidy.gpg \
@@ -39,8 +35,7 @@ RUN set -ex \
         gcc \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ~/.cache \
- && chown mopidy:audio -R /var/lib/mopidy/.config \
- && chown mopidy:audio /entrypoint.sh
+ && chown mopidy:audio -R /var/lib/mopidy/.config
 
 # Run as mopidy user
 USER mopidy
@@ -50,7 +45,5 @@ VOLUME /var/lib/mopidy/media
 
 EXPOSE 6600
 EXPOSE 6680
-EXPOSE 8000
 
-ENTRYPOINT ["/entrypoint.sh"]
 CMD ["/usr/bin/mopidy"]
