@@ -1,6 +1,6 @@
 FROM debian:jessie
 
-MAINTAINER Werner Beroux <werner@beroux.com>
+MAINTAINER Tres Trantham <tres@trestrantham.com>
 
 # Default mopidy configuration
 COPY mopidy.conf /var/lib/mopidy/.config/mopidy/mopidy.conf
