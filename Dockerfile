@@ -5,10 +5,6 @@ MAINTAINER Tres Trantham <tres@trestrantham.com>
 # Default mopidy configuration
 COPY mopidy.conf /var/lib/mopidy/.config/mopidy/mopidy.conf
 
-# Default icecast configuration
-COPY icecast.xml /usr/share/icecast/icecast.xml
-COPY silence.mp3 /usr/share/icecast/web/silence.mp3
-
 # Official Mopidy install for Debian/Ubuntu along with some extensions
 # (see https://docs.mopidy.com/en/latest/installation/debian/ )
 RUN set -ex \
